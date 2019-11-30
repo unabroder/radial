@@ -148,6 +148,8 @@ public class UsuarioServlet extends HttpServlet {
         List<UsuarioBean> lista = usuDao.consultar();
         List<TipoUsuario> tipo = tipoD.consultar();
         request.setAttribute("msg", msg);
+        
+        
         rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }
