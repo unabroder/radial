@@ -147,7 +147,9 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         List<UsuarioBean> lista = usuDao.consultar();
         List<TipoUsuario> tipo = tipoD.consultar();
-
+        request.setAttribute("msg", msg);
+        rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);
     }
 
     protected void restablecer(HttpServletRequest request, HttpServletResponse response)
