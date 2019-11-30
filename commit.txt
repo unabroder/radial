@@ -1,0 +1,17 @@
+commit e58f5f12054a00bc724348deb511601c06ccb5c5
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Sat Nov 30 10:13:35 2019 -0600
+
+    error
+
+commit dff3ef6f70d91984681e6b52118f7e710dfc2e94
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Sat Nov 30 09:48:58 2019 -0600
+
+    verion 1.0.1
+
+commit a72f3ecba48bff9a01b98012783c141ffcec848a
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Sat Nov 30 09:17:45 2019 -0600
+
+    version 1.0.0
