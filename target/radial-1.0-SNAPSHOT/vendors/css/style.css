@@ -1,0 +1,27 @@
+/* Empty CSS file for your own CSS*/
+.fondoinicio{
+    background-image: linear-gradient(to right, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    color: white;
+    font-weight: bold;
+}
+.boton{
+    padding-left:10px;
+}
+.linea{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    background-color: orange;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.fila{
+    padding-top: 10%;
+}
+.fondo{
+   height: 100vh;
+}
+
