@@ -102,7 +102,7 @@ public class TipoDao {
     }
 
     public boolean eliminar(int id) {
-        String sql = "DELETE FROM tipousuario WHERE idtipo = ? ";
+        String sql = "UPDATE  tipousuario SET estado = 0 WHERE idtipo = ? ";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setInt(1, id);
