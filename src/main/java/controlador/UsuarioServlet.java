@@ -111,7 +111,7 @@ public class UsuarioServlet extends HttpServlet {
             //rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
             rd.forward(request, response);
         } else {
-            res = usuDao.guardar(usu);
+            res = usuDao.actualizar(usu);
             if (res) {
                 msg = "noexiste";
             } else {

@@ -35,6 +35,11 @@ clave varchar(100) not null,
 estado int(11) not null default 1,
 constraint foreign key (idtipo) references tipousuario(idtipo) on delete cascade on update cascade
 )ENGINE InnoDB;
+select * from usuarios;
+select idusuario, idtipo, case when usuario = 'roberto' then usuario else idusuario END as nuevo,
+usuario, estado
+from usuarios;
+
 
 create table cargo(
 idcargo int(11) not null primary key auto_increment,
@@ -54,6 +59,11 @@ constraint foreign key (idcargo) references cargo(idcargo) on delete cascade on 
 constraint foreign key (idproductora) references productora(idproductora) on delete cascade on update cascade
 )ENGINE InnoDB;
 
+SELECT per.idpersonal, per.idproductora, per.idcargo, per.nombre,
+                per.apellido, per.dui, pro.numbre, c.cargo FROM personal as per 
+               INNER JOIN productora as pro ON pro.idproductora = per.idproductora
+            INNER JOIN cargo as c ON c.idcargo = per.idcargo WHERE per.estado = 1;
+
 create table frecuencia(
 idfrecuencia int(11) not null primary key auto_increment,
 frecuencia decimal(10,2) not null unique,
@@ -70,6 +80,12 @@ estado int(1) not null default 1,
 constraint foreign key (idproductora) references productora(idproductora) on delete cascade on update cascade,
 constraint foreign key (idfrecuencia) references frecuencia(idfrecuencia) on delete cascade on update cascade
 )ENGINE InnoDB;
+
+SELECT rad.idproductora, rad.idfrecuencia, rad.nombre, 
+                 pro.numbre, fre.frecuencia FROM radio as rad 
+                INNER JOIN productora as pro ON pro.idproductora = rad.idproductora 
+                INNER JOIN frecuencia as fre ON fre.idfrecuencia = rad.idfrecuencia 
+              WHERE rad.estado = 1;
 
 create table genero(
 idgenero int(11) not null primary key auto_increment,
@@ -131,3 +147,6 @@ constraint foreign key (idradio) references radio(idradio) on delete cascade on 
 constraint foreign key (idprograma) references programas(idprograma) on delete cascade on update cascade,
 constraint foreign key (idresumen) references resumen(idresumen) on delete cascade on update cascade
 )ENGINE InnoDB;
+
+alter table personal 
+add foreign key (idpersonal) references usuarios(idusuario) on delete cascade on update cascade;
