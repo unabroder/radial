@@ -105,6 +105,7 @@ public class RadioDao {
                 rad.setNombre(rs.getString("nombre"));
                 pro.setNumbre(rs.getString("numbre"));
                 fre.setFrecuencia(rs.getDouble("frecuencia"));
+                System.out.println("radios");
                 lista.add(rad);
             }
             return lista;

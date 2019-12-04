@@ -9,6 +9,6 @@
     if (sesion.getAttribute("usuario") != null) {
         nombre = sesion.getAttribute("usuario").toString();
     } else {
-        response.sendRedirect("index.jsp");
+       response.sendRedirect("../../index.jsp");
     }
 %>

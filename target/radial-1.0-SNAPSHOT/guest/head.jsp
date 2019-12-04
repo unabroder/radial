@@ -10,8 +10,8 @@
         <meta name="description" content="Registra las radios de El Salvador">
         <meta name="author" content="raag">
 
-        <link href="../vendors/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../vendors/css/style.css" rel="stylesheet">
+        <link href="vendors/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendors/css/style.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     </head>
-    <body class="">
+    <body class="fondoinicio">

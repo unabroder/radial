@@ -6,9 +6,7 @@
 package controlador;
 
 import conexion.Conexion;
-import conexion.Hash;
-import dao.LoginDao;
-import dao.TipoDao;
+import dao.RadioDao;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,22 +14,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import modelo.Login;
-import modelo.TipoUsuario;
+import modelo.RadioBean;
 
 /**
  *
  * @author roberto.alferesusam
  */
-public class LoginServlet extends HttpServlet {
-
+public class RadioServlet extends HttpServlet {
+    
     RequestDispatcher rd;
     boolean res;
     String msg;
     Conexion conexion = new Conexion();
-    LoginDao logD = new LoginDao(conexion);
-    TipoDao tipoDao = new TipoDao(conexion);
+    RadioDao radao = new RadioDao(conexion);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,46 +41,18 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         switch (action) {
-            case "acceso":
-                acceso(request, response);
-                break;
-            case "registrar":
-                registrate(request, response);
+            case "consultar":
+                consultar(request, response);
                 break;
         }
     }
-
-    protected void acceso(HttpServletRequest request, HttpServletResponse response)
+    
+    protected void consultar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");
-        Login log = new Login(0);
-        Hash hash = new Hash();
-        String pass = hash.convertirSHA256(clave);
-        log.setUsuario(usuario);
-        log.setClave(pass);
-
-        res = logD.login(log);
-
-        if (res) {
-            HttpSession sesion = request.getSession(true);
-            sesion.setAttribute("usuario", log.getUsuario());
-            System.out.println(log.getUsuario());
-            sesion.setAttribute("tipo", log.getIdtipo());
-            response.sendRedirect("admin.jsp");
-        } else {
-            msg = "login";
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
-        }
-    }
-
-    protected void registrate(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<TipoUsuario> lista = tipoDao.consultar();
+        List<RadioBean> lista = radao.consultar();
         request.setAttribute("lista", lista);
-        rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
+//        response.sendRedirect("radio.jsp");
+        rd = request.getRequestDispatcher("radio.jsp");
         rd.forward(request, response);
     }
 
