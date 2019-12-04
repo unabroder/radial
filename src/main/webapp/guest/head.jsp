@@ -14,4 +14,5 @@
         <link href="vendors/css/style.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     </head>
-    <body class="fondoinicio">
+    <body class="bg-info">
+        <div class="container-fluid">
