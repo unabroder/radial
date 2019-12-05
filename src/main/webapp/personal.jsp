@@ -18,28 +18,32 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Usuarios</label>
+                    <label class="h3 text-white">Personal</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">
                             <tr>
                                 <th>#</th>
-                                <th>Tipo</th>
-                                <th>Usuario</th>
-                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Usuario</button></th>
+                                <th>Productora</th>
+                                <th>Cargo</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Personal</button></th>
                             </tr>
                         </thead>
 
                         <tbody class="bg-success">
-                        <c:forEach items="${lista}" var="usu">
+                        <c:forEach items="${lista}" var="per">
                             <tr>
-                                <td >${usu.idusuario}</td>
-                                <td id="tele">${usu.idtipo.tipo}</td>
-                                <td id="tele">${usu.usuario}</td>
+                                <td >${per.idpersonal}</td>
+                                <td id="tele">${per.idproductora.numbre}</td>
+                                <td id="tele">${per.idcargo.cargo}</td>
+                                <td >${per.nombre}</td>
+                                <td >${per.apellido}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${usu.idusuario}', '${usu.idtipo.idtipo}', '${usu.usuario}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${per.idpersonal}', '${per.idproductora.idproductora}', '${per.idcargo.idcargo}', '${per.nombre}', '${per.apellido}', '${per.dui}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Usuario?action=eliminar&id=', ${usu.idusuario})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Personal?action=eliminar&id=', ${per.idpersonal})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
                         </c:forEach>   
                     </tbody>
@@ -57,7 +61,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Personal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
