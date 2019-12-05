@@ -6,7 +6,7 @@
 package controlador;
 
 import conexion.Conexion;
-import dao.ProductoraDao;
+import dao.CargoDao;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -14,20 +14,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.ProductoraBean;
+import modelo.CargoBean;
 
 /**
  *
- * @author roberto.alferesusam
+ * @author PEDRINSKY
  */
-public class ProductoraServlet extends HttpServlet {
+public class CargoServlet extends HttpServlet {
 
     RequestDispatcher rd;
     boolean res;
     String msg;
     Conexion conexion = new Conexion();
-    ProductoraDao prodao = new ProductoraDao(conexion);
-    
+    CargoDao cdao = new CargoDao(conexion);
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,79 +61,74 @@ public class ProductoraServlet extends HttpServlet {
 
     protected void consultar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<ProductoraBean> lista = prodao.consultar();
-
+        List<CargoBean> lista = cdao.consultar();
         request.setAttribute("lista", lista);
-        rd = request.getRequestDispatcher("productora.jsp");
+        rd = request.getRequestDispatcher("cargo.jsp");
         rd.forward(request, response);
     }
 
     protected void consultarById(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<ProductoraBean> lista = prodao.consultarById(id);
+        List<CargoBean> lista = cdao.consultarById(id);
         request.setAttribute("lista", lista);
-        rd = request.getRequestDispatcher("productora.jsp");
+        rd = request.getRequestDispatcher("cargo.jsp");
         rd.forward(request, response);
     }
 
     protected void guardar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String numbre = request.getParameter("nombre");
-        String rfc = request.getParameter("rfc");
-        ProductoraBean pro = new ProductoraBean(0);
-        pro.setNumbre(numbre);
-        pro.setRfc(rfc);
-        res = prodao.validar(pro);
+        String cargo = request.getParameter("cargo");
+        CargoBean cargobean = new CargoBean(0);
+        cargobean.setCargo(cargo);
+        res = cdao.validar(cargobean);
         if (res) {
-            msg = "La productora ya existe";
-            List<ProductoraBean> lista = prodao.consultar();
-            request.setAttribute("lista", lista);
+            msg = "El cargo ya existe";
+            List<CargoBean> lista = cdao.consultar();
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("productora.jsp");
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("cargo.jsp");
             rd.forward(request, response);
         } else {
-            res = prodao.guardar(pro);
+            res = cdao.guardar(cargobean);
             if (res) {
-                msg = "Productora registrada";
+                msg = "Se registro el cargo";
             } else {
-                msg = "Productora no registrada";
+                msg = "No se registro el cargo";
             }
-            List<ProductoraBean> lista = prodao.consultar();
-            request.setAttribute("lista", lista);
+            List<CargoBean> lista = cdao.consultar();
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("productora.jsp");
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("cargo.jsp");
             rd.forward(request, response);
         }
     }
 
     protected void actualizar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idproductora = Integer.parseInt(request.getParameter("idproductora"));
-        String numbre = request.getParameter("nombre");
-        String rfc = request.getParameter("rfc");
-        ProductoraBean pro = new ProductoraBean(idproductora);
-        pro.setNumbre(numbre);
-        pro.setRfc(rfc);
-        res = prodao.validar(pro);
+        int idcargo = Integer.parseInt(request.getParameter("idcargo"));
+        String cargo = request.getParameter("cargo");
+        CargoBean cargobean = new CargoBean(idcargo);
+        cargobean.setCargo(cargo);
+        res = cdao.validar(cargobean);
         if (res) {
-            msg = "La productora ya existe";
-            List<ProductoraBean> lista = prodao.consultar();
-            request.setAttribute("lista", lista);
+            msg = "El cargo ya existe";
+            List<CargoBean> lista = cdao.consultar();
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("productora.jsp");
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("cargo.jsp");
             rd.forward(request, response);
         } else {
-            res = prodao.actualizar(pro);
+            res = cdao.actualizar(cargobean);
             if (res) {
-                msg = "Productora actualizada";
+                msg = "Se actualizo el cargo";
             } else {
-                msg = "Productora no actualizada";
+                msg = "No se actualizo el cargo";
             }
-            List<ProductoraBean> lista = prodao.consultar();
-            request.setAttribute("lista", lista);
+            List<CargoBean> lista = cdao.consultar();
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("productora.jsp");
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("cargo.jsp");
             rd.forward(request, response);
         }
     }
@@ -141,16 +136,16 @@ public class ProductoraServlet extends HttpServlet {
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        res = prodao.eliminar(id);
+        res = cdao.eliminar(id);
         if (res) {
-            msg = "Productora eliminada";
+            msg = "Se elimino el cargo";
         } else {
-            msg = "Productora no eliminada";
+            msg = "No se elimino el cargo";
         }
-        List<ProductoraBean> lista = prodao.consultar();
-        request.setAttribute("lista", lista);
+        List<CargoBean> lista = cdao.consultar();
         request.setAttribute("msg", msg);
-        rd = request.getRequestDispatcher("productora.jsp");
+        request.setAttribute("lista", lista);
+        rd = request.getRequestDispatcher("cargo.jsp");
         rd.forward(request, response);
     }
 

@@ -20,6 +20,18 @@
         <servlet-name>ProductoraServlet</servlet-name>
         <servlet-class>controlador.ProductoraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CargoServlet</servlet-name>
+        <servlet-class>controlador.CargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmisionServlet</servlet-name>
+        <servlet-class>controlador.EmisionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProgramaServlet</servlet-name>
+        <servlet-class>controlador.ProgramaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>ProductoraServlet</servlet-name>
         <url-pattern>/Productora</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargoServlet</servlet-name>
+        <url-pattern>/Cargo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmisionServlet</servlet-name>
+        <url-pattern>/Emision</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProgramaServlet</servlet-name>
+        <url-pattern>/Programa</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
