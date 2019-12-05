@@ -32,6 +32,30 @@
         <servlet-name>ProgramaServlet</servlet-name>
         <servlet-class>controlador.ProgramaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FrecuenciaServlet</servlet-name>
+        <servlet-class>controlador.FrecuenciaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GeneroServlet</servlet-name>
+        <servlet-class>controlador.GeneroServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResumenServlet</servlet-name>
+        <servlet-class>controlador.ResumenServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TipoUsuarioServlet</servlet-name>
+        <servlet-class>controlador.TipoUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PersonalServlet</servlet-name>
+        <servlet-class>controlador.PersonalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncuestaServlet</servlet-name>
+        <servlet-class>controlador.EncuestaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -63,6 +87,30 @@
     <servlet-mapping>
         <servlet-name>ProgramaServlet</servlet-name>
         <url-pattern>/Programa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FrecuenciaServlet</servlet-name>
+        <url-pattern>/Frecuencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeneroServlet</servlet-name>
+        <url-pattern>/Genero</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResumenServlet</servlet-name>
+        <url-pattern>/Resumen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoUsuarioServlet</servlet-name>
+        <url-pattern>/TipoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PersonalServlet</servlet-name>
+        <url-pattern>/Personal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncuestaServlet</servlet-name>
+        <url-pattern>/Encuesta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

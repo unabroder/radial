@@ -3,6 +3,7 @@ modelo\EncuestaBean.class
 dao\ProgramaDao.class
 dao\FrecuenciaDao.class
 dao\PersonalDao.class
+controlador\CargoServlet.class
 dao\GeneroDao.class
 modelo\TipoUsuario.class
 controlador\UsuarioServlet.class
@@ -15,13 +16,13 @@ modelo\ResumenBean.class
 modelo\CargoBean.class
 conexion\PruebaConexion.class
 conexion\Conexion.class
-dao\ResumenDao.class
+dao\EncuestaDao.class
 modelo\Login.class
-controlador\RadioServlet.class
 modelo\ProductoraBean.class
 dao\TipoDao.class
 dao\RadioDao.class
 modelo\TelefonoBean.class
+controlador\ProductoraServlet.class
 modelo\FrecuenciaBean.class
 modelo\PersonalBean.class
 dao\UsuarioDao.class

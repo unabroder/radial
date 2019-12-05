@@ -12,6 +12,7 @@
 
         <link href="vendors/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendors/css/style.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" >
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     </head>
     <body class="bg-info">

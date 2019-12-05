@@ -87,7 +87,10 @@ public class TelefonoServlet extends HttpServlet {
         if (res) {
             msg = "Ya existe el telefono";
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
+            List<TelefonoBean> lista = teldao.consultar();
+
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("telefono.jsp");
             rd.forward(request, response);
         } else {
             res = teldao.guardar(tel);
@@ -114,10 +117,13 @@ public class TelefonoServlet extends HttpServlet {
         if (res) {
             msg = "Ya existe el telefono";
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
+            List<TelefonoBean> lista = teldao.consultar();
+
+            request.setAttribute("lista", lista);
+            rd = request.getRequestDispatcher("telefono.jsp");
             rd.forward(request, response);
         } else {
-            res = teldao.guardar(tel);
+            res = teldao.actualizar(tel);
             if (res) {
                 msg = "Telefono actualizado";
             } else {

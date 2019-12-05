@@ -76,7 +76,7 @@ public class TelefonoDao {
     }
 
     public List<TelefonoBean> consultar() {
-        String sql = "SELECT istelefono, telefono FROM telefono WHERE estado = 1";
+        String sql = "SELECT idtelefono, telefono FROM telefono WHERE estado = 1";
         try {
             List<TelefonoBean> lista = new LinkedList<>();
             TelefonoBean tel;
@@ -94,7 +94,7 @@ public class TelefonoDao {
     }
 
     public List<TelefonoBean> consultarById(int id) {
-        String sql = "SELECT istelefono, telefono FROM telefono WHERE idtelefono = ?";
+        String sql = "SELECT idtelefono, telefono FROM telefono WHERE idtelefono = ?";
         try {
             List<TelefonoBean> lista = new LinkedList<>();
             TelefonoBean tel;

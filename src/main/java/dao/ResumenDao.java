@@ -81,8 +81,8 @@ public class ResumenDao {
         }
     }
     
-    public List<ResumenBean> consultar(int id) {
-        String sql = "SELECT * FROM resumen WHERE estado = 1";
+    public List<ResumenBean> consultarById(int id) {
+        String sql = "SELECT * FROM resumen WHERE idestado = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setInt(1, id);
