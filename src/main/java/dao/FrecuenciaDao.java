@@ -17,27 +17,30 @@ import modelo.FrecuenciaBean;
  * @author roberto.alferesusam
  */
 public class FrecuenciaDao {
-    
+
     Conexion conexion;
     PreparedStatement ps;
     ResultSet rs;
-    
+
     public FrecuenciaDao(Conexion conexion) {
         this.conexion = conexion;
     }
-    
+
     public boolean validar(FrecuenciaBean fre) {
         String sql = "SELECT frecuencia FROM frecuencia WHERE frecuencia = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setDouble(1, fre.getFrecuencia());
-            ps.executeQuery();
-            return true;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
     }
-    
+
     public boolean guardar(FrecuenciaBean fre) {
         String sql = "INSERT INTO frecuencia(frecuencia, tipo) VALUES(?,?)";
         try {
@@ -50,7 +53,7 @@ public class FrecuenciaDao {
             return false;
         }
     }
-    
+
     public boolean actualizar(FrecuenciaBean fre) {
         String sql = "UPDATE frecuencia SET frecuencia = ?, tipo = ? WHERE idfrecuencia = ?";
         try {
@@ -64,7 +67,7 @@ public class FrecuenciaDao {
             return false;
         }
     }
-    
+
     public boolean eliminar(int id) {
         String sql = "UPDATE frecuencia SET estado = 0 WHERE idfrecuencia = ?";
         try {
@@ -76,7 +79,7 @@ public class FrecuenciaDao {
             return false;
         }
     }
-    
+
     public List<FrecuenciaBean> consultar() {
         String sql = "SELECT * FROM frecuencia WHERE estado = 1";
         try {

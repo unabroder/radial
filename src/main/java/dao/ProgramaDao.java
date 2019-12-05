@@ -32,8 +32,11 @@ public class ProgramaDao {
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, pro.getNombre());
-            ps.executeQuery();
-            return true;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
@@ -82,7 +85,7 @@ public class ProgramaDao {
         }
     }
 
-     public List<ProgramaBean> consultar() {
+    public List<ProgramaBean> consultar() {
         String sql = "SELECT pro.idprograma, pro.genero, pro.nombre, "
                 + " pro.descripcion, gen.genero FROM programas as pro "
                 + " INNER JOIN genero as gen ON gen.idgenero = pro.idgenero "
@@ -93,21 +96,21 @@ public class ProgramaDao {
             ps = conexion.conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-               pro = new ProgramaBean(rs.getInt("idprograma"));
-               GeneroBean gen = new GeneroBean(rs.getInt("idgenero"));
-               pro.setIdgenero(gen);
-               pro.setNombre(rs.getString("nombre"));
-               pro.setDescripcion(rs.getString("descripcion"));
-               gen.setGenero(rs.getString("genero"));
-               lista.add(pro);
+                pro = new ProgramaBean(rs.getInt("idprograma"));
+                GeneroBean gen = new GeneroBean(rs.getInt("idgenero"));
+                pro.setIdgenero(gen);
+                pro.setNombre(rs.getString("nombre"));
+                pro.setDescripcion(rs.getString("descripcion"));
+                gen.setGenero(rs.getString("genero"));
+                lista.add(pro);
             }
             return lista;
         } catch (Exception e) {
             return null;
         }
     }
-    
-        public List<ProgramaBean> consultarById(int id) {
+
+    public List<ProgramaBean> consultarById(int id) {
         String sql = "SELECT pro.idprograma, pro.genero, pro.nombre, "
                 + " pro.descripcion, gen.genero FROM programas as pro "
                 + " INNER JOIN genero as gen ON gen.idgenero = pro.idgenero "
@@ -119,18 +122,18 @@ public class ProgramaDao {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-               pro = new ProgramaBean(rs.getInt("idprograma"));
-               GeneroBean gen = new GeneroBean(rs.getInt("idgenero"));
-               pro.setIdgenero(gen);
-               pro.setNombre(rs.getString("nombre"));
-               pro.setDescripcion(rs.getString("descripcion"));
-               gen.setGenero(rs.getString("genero"));
-               lista.add(pro);
+                pro = new ProgramaBean(rs.getInt("idprograma"));
+                GeneroBean gen = new GeneroBean(rs.getInt("idgenero"));
+                pro.setIdgenero(gen);
+                pro.setNombre(rs.getString("nombre"));
+                pro.setDescripcion(rs.getString("descripcion"));
+                gen.setGenero(rs.getString("genero"));
+                lista.add(pro);
             }
             return lista;
         } catch (Exception e) {
             return null;
         }
     }
-     
+
 }

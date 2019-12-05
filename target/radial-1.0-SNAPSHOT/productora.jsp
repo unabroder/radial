@@ -18,26 +18,28 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Telefonos</label>
+                    <label class="h3 text-white">Compañias Productoras</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">
                             <tr>
                                 <th>#</th>
-                                <th>Telefono</th>
-                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Telefono</button></th>
+                                <th>Productora</th>
+                                <th>RFC</th>
+                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Productora</button></th>
                             </tr>
                         </thead>
 
                         <tbody class="bg-success">
-                        <c:forEach items="${lista}" var="tel">
+                        <c:forEach items="${lista}" var="pro">
                             <tr>
-                                <td >${tel.idtelefono}</td>
-                                <td id="tele">${tel.telefono}</td>
+                                <td >${pro.idproductora}</td>
+                                <td id="tele">${pro.numbre}</td>
+                                <td id="tele">${pro.rfc}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${tel.idtelefono}', '${tel.telefono}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${pro.idproductora}', '${pro.numbre}', '${pro.rfc}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Telefono?action=eliminar&id=', ${tel.idtelefono})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Productora?action=eliminar&id=', ${pro.idproductora})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
                         </c:forEach>   
                     </tbody>
@@ -55,15 +57,17 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Productora</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=guardar" method="POST" class="form">
-                        <label>Telefono</label>
-                        <input name="telefono" required="true" type="text" class="form-control">
+                    <form action="Productora?action=guardar" method="POST" class="form">
+                        <label>Productora</label>
+                        <input name="nombre" required="true" type="text" class="form-control">
+                        <label>Numero de Registro Unico</label>
+                        <input name="rfc" required="true" type="text" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Guardar</button>
                     </form>
                 </div>
@@ -77,16 +81,18 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Productora</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=actualizar" method="POST" class="form">
-                        <input name="idtelefono" id="id" type="hidden" >
-                        <label>Telefono</label>
-                        <input name="telefono" id="telefono" required="true" type="text" class="form-control" >
+                    <form action="Productora?action=actualizar" method="POST" class="form">
+                        <input type="hidden" name="idproductora" id="id">
+                        <label>Productora</label>
+                        <input name="nombre" required="true" id="nombre" type="text" class="form-control">
+                        <label>Numero de Registro Unico</label>
+                        <input name="rfc" required="true" type="text"  id="rfc" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -98,11 +104,11 @@
     </div>
 </section>
 <script>
-    function editar(id, telefono) {
+    function editar(id, nombre, rfc) {
         document.getElementById("id").value = id;
-        document.getElementById("telefono").value = telefono;
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("rfc").value = rfc;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 
 <jsp:include page="guest/footer.jsp"></jsp:include>
-

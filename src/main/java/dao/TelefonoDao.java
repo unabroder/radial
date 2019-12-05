@@ -64,12 +64,15 @@ public class TelefonoDao {
     }
 
     public boolean validar(TelefonoBean tel) {
-        String sql = "SELECT telefono FROM telefono WHERE tel = ?";
+        String sql = "SELECT telefono FROM telefono WHERE telefono = ? ";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, tel.getTelefono());
             rs = ps.executeQuery();
-            return true;
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }

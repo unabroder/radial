@@ -69,8 +69,10 @@ public class TipoDao {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, tp.getTipo());
             rs = ps.executeQuery();
-
-            return true;
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
@@ -93,7 +95,7 @@ public class TipoDao {
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, tp.getTipo());
-            ps.setInt(1, tp.getIdtipo());
+            ps.setInt(2, tp.getIdtipo());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {

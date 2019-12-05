@@ -27,7 +27,7 @@ public class ProductoraDao {
     }
 
     public boolean guardar(ProductoraBean pro) {
-        String sql = "INSERT INTO productora(nombre, rfc) VALUES(?,?)";
+        String sql = "INSERT INTO productora(numbre, rfc) VALUES(?,?)";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, pro.getNumbre());
@@ -40,7 +40,7 @@ public class ProductoraDao {
     }
 
     public List<ProductoraBean> consultarById(int id) {
-        String sql = "SELECT idproductora, nombre, rfc FROM productora WHERE idproductora = ?";
+        String sql = "SELECT idproductora, numbre, rfc FROM productora WHERE idproductora = ?";
         try {
             List<ProductoraBean> lista = new LinkedList<>();
             ProductoraBean pro;
@@ -49,7 +49,7 @@ public class ProductoraDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 pro = new ProductoraBean(rs.getInt("idproductora"));
-                pro.setNumbre(rs.getString("nombre"));
+                pro.setNumbre(rs.getString("numbre"));
                 pro.setRfc(rs.getString("rfc"));
                 lista.add(pro);
             }
@@ -60,7 +60,7 @@ public class ProductoraDao {
     }
 
     public boolean actualizar(ProductoraBean pro) {
-        String sql = "UPDATE productora SET nombre = ?, rfc = ? WHERE idproductora = ?";
+        String sql = "UPDATE productora SET numbre = ?, rfc = ? WHERE idproductora = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, pro.getNumbre());
@@ -86,19 +86,22 @@ public class ProductoraDao {
     }
 
     public boolean validar(ProductoraBean pro) {
-        String sql = "SELECT nombre FROM productora WHERE nombre = ?";
+        String sql = "SELECT numbre FROM productora WHERE numbre = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, pro.getNumbre());
-            ps.executeQuery();
-            return true;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
     }
 
     public List<ProductoraBean> consultar() {
-        String sql = "SELECT idproductora, nombre, rfc FROM productora WHERE estado = 1";
+        String sql = "SELECT idproductora, numbre, rfc FROM productora WHERE estado = 1";
         try {
             List<ProductoraBean> lista = new LinkedList<>();
             ProductoraBean pro;
@@ -106,7 +109,7 @@ public class ProductoraDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 pro = new ProductoraBean(rs.getInt("idproductora"));
-                pro.setNumbre(rs.getString("nombre"));
+                pro.setNumbre(rs.getString("numbre"));
                 pro.setRfc(rs.getString("rfc"));
                 lista.add(pro);
             }

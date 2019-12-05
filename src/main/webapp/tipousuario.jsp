@@ -25,19 +25,19 @@
                             <tr>
                                 <th>#</th>
                                 <th>Telefono</th>
-                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Telefono</button></th>
+                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tipo Usuario</button></th>
                             </tr>
                         </thead>
 
                         <tbody class="bg-success">
-                        <c:forEach items="${lista}" var="tel">
+                        <c:forEach items="${lista}" var="tipo">
                             <tr>
-                                <td >${tel.idtelefono}</td>
-                                <td id="tele">${tel.telefono}</td>
+                                <td >${tipo.idtipo}</td>
+                                <td id="tele">${tipo.tipo}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${tel.idtelefono}', '${tel.telefono}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${tipo.idtipo}', '${tipo.tipo}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Telefono?action=eliminar&id=', ${tel.idtelefono})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('TipoUsuario?action=eliminar&id=', ${tipo.idtipo})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
                         </c:forEach>   
                     </tbody>
@@ -55,15 +55,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Tipo de Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=guardar" method="POST" class="form">
+                    <form action="TipoUsuario?action=guardar" method="POST" class="form">
                         <label>Telefono</label>
-                        <input name="telefono" required="true" type="text" class="form-control">
+                        <input name="tipousuario" required="true" type="text" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Guardar</button>
                     </form>
                 </div>
@@ -77,16 +77,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Tipo Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=actualizar" method="POST" class="form">
-                        <input name="idtelefono" id="id" type="hidden" >
+                    <form action="TipoUsuario?action=actualizar" method="POST" class="form">
+                        <input name="idtipo" id="id" type="hidden" >
                         <label>Telefono</label>
-                        <input name="telefono" id="telefono" required="true" type="text" class="form-control" >
+                        <input name="tipousuario" id="tipo" required="true" type="text" class="form-control" >
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -98,11 +98,10 @@
     </div>
 </section>
 <script>
-    function editar(id, telefono) {
+    function editar(id, tipo) {
         document.getElementById("id").value = id;
-        document.getElementById("telefono").value = telefono;
+        document.getElementById("tipo").value = tipo;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 
 <jsp:include page="guest/footer.jsp"></jsp:include>
-

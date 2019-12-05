@@ -51,6 +51,21 @@ public class UsuarioServlet extends HttpServlet {
             case "restablecer":
                 restablecer(request, response);
                 break;
+            case "insert":
+                insert(request, response);
+                break;
+            case "eliminar":
+                eliminar(request, response);
+                break;
+            case "update":
+                update(request, response);
+                break;
+            case "consultar":
+                consultar(request, response);
+                break;
+            case "consultarById":
+                consultarById(request, response);
+                break;
         }
     }
 
@@ -88,7 +103,47 @@ public class UsuarioServlet extends HttpServlet {
         }
     }
 
-    protected void actualizar(HttpServletRequest request, HttpServletResponse response)
+    protected void insert(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int idtipo = Integer.parseInt(request.getParameter("idtipo"));
+        String usuario = request.getParameter("usuario");
+        String clave = request.getParameter("clave");
+        Hash hash = new Hash();
+        String pass = hash.convertirSHA256(clave);
+        UsuarioBean usu = new UsuarioBean(0);
+        TipoUsuario tp = new TipoUsuario(idtipo);
+        usu.setIdtipo(tp);
+        usu.setUsuario(usuario);
+        usu.setClave(pass);
+
+        res = usuDao.validar(usu);
+        if (res) {
+            msg = "existe";
+            List<UsuarioBean> lista = usuDao.consultar();
+            List<TipoUsuario> tipo = tipoD.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("tipo", tipo);
+            request.setAttribute("msg", msg);
+            rd = request.getRequestDispatcher("usuarios.jsp");
+            rd.forward(request, response);
+        } else {
+            res = usuDao.guardar(usu);
+            if (res) {
+                msg = "noexiste";
+            } else {
+                msg = "existe";
+            }
+            List<UsuarioBean> lista = usuDao.consultar();
+            List<TipoUsuario> tipo = tipoD.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("tipo", tipo);
+            request.setAttribute("msg", msg);
+            rd = request.getRequestDispatcher("usuarios.jsp");
+            rd.forward(request, response);
+        }
+    }
+
+    protected void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idusuario = Integer.parseInt(request.getParameter("idusuario"));
         int idtipo = Integer.parseInt(request.getParameter("idtipo"));
@@ -105,10 +160,12 @@ public class UsuarioServlet extends HttpServlet {
         res = usuDao.validar(usu);
         if (res) {
             msg = "existe";
-            request.setAttribute("msg", msg);
-            List<TipoUsuario> lista = tipoD.consultar();
+            List<UsuarioBean> lista = usuDao.consultar();
+            List<TipoUsuario> tipo = tipoD.consultar();
             request.setAttribute("lista", lista);
-            //rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
+            request.setAttribute("tipo", tipo);
+            request.setAttribute("msg", msg);
+            rd = request.getRequestDispatcher("usuarios.jsp");
             rd.forward(request, response);
         } else {
             res = usuDao.actualizar(usu);
@@ -117,8 +174,12 @@ public class UsuarioServlet extends HttpServlet {
             } else {
                 msg = "existe";
             }
+            List<UsuarioBean> lista = usuDao.consultar();
+            List<TipoUsuario> tipo = tipoD.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("tipo", tipo);
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("index.jsp");
+            rd = request.getRequestDispatcher("usuarios.jsp");
             rd.forward(request, response);
         }
     }
@@ -130,26 +191,37 @@ public class UsuarioServlet extends HttpServlet {
         res = usuDao.eliminar(id);
         if (res) {
             msg = "Usuario Eliminado";
-            request.setAttribute("msg", msg);
-            List<TipoUsuario> lista = tipoD.consultar();
-            request.setAttribute("lista", lista);
-            //rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
-            rd.forward(request, response);
         } else {
             msg = "Usuario no eliminado";
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
         }
+        List<UsuarioBean> lista = usuDao.consultar();
+        List<TipoUsuario> tipo = tipoD.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("msg", msg);
+        rd = request.getRequestDispatcher("usuarios.jsp");
+        rd.forward(request, response);
     }
 
     protected void consultar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<UsuarioBean> lista = usuDao.consultar();
         List<TipoUsuario> tipo = tipoD.consultar();
-        request.setAttribute("msg", msg);
-        
+        request.setAttribute("lista", lista);
+        request.setAttribute("tipo", tipo);
+        rd = request.getRequestDispatcher("usuarios.jsp");
+        rd.forward(request, response);
+    }
 
+    protected void consultarById(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<UsuarioBean> lista = usuDao.consultar();
+        List<TipoUsuario> tipo = tipoD.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("tipo", tipo);
+        rd = request.getRequestDispatcher("usuarios.jsp");
+        rd.forward(request, response);
     }
 
     protected void restablecer(HttpServletRequest request, HttpServletResponse response)

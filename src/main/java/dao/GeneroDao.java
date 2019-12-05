@@ -17,27 +17,30 @@ import modelo.GeneroBean;
  * @author roberto.alferesusam
  */
 public class GeneroDao {
-    
+
     Conexion conexion;
     PreparedStatement ps;
     ResultSet rs;
-    
+
     public GeneroDao(Conexion conexion) {
         this.conexion = conexion;
     }
-    
+
     public boolean validar(GeneroBean gen) {
         String sql = "SELECT  genero FROM genero WHERE genero = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, gen.getGenero());
-            ps.executeQuery();
-            return true;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
     }
-    
+
     public boolean guardar(GeneroBean gen) {
         String sql = "INSERT INTO genero(genero) VALUES(?)";
         try {
@@ -49,7 +52,7 @@ public class GeneroDao {
             return false;
         }
     }
-    
+
     public boolean actualizar(GeneroBean gen) {
         String sql = "UPDATE genero SET genero = ? WHERE idgenero = ?";
         try {
@@ -62,7 +65,7 @@ public class GeneroDao {
             return false;
         }
     }
-    
+
     public boolean eliminar(int id) {
         String sql = "UPDATE genero SET estado = 0 WHERE idgenero = ?";
         try {
@@ -74,7 +77,7 @@ public class GeneroDao {
             return false;
         }
     }
-    
+
     public List<GeneroBean> consultar() {
         String sql = "SELECT * FROM genero WHERE estado = 1";
         try {
@@ -82,7 +85,7 @@ public class GeneroDao {
             GeneroBean gen;
             ps = conexion.conectar().prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 gen = new GeneroBean(rs.getInt("idgenero"));
                 gen.setGenero(rs.getString("genero"));
                 lista.add(gen);
@@ -92,7 +95,7 @@ public class GeneroDao {
             return null;
         }
     }
-    
+
     public List<GeneroBean> consultarById(int id) {
         String sql = "SELECT * FROM genero WHERE idgenero = ?";
         try {
@@ -101,7 +104,7 @@ public class GeneroDao {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 gen = new GeneroBean(rs.getInt("idgenero"));
                 gen.setGenero(rs.getString("genero"));
                 lista.add(gen);

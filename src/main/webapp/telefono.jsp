@@ -32,39 +32,14 @@
                         <tbody class="bg-success">
                         <c:forEach items="${lista}" var="tel">
                             <tr>
-                                <td ><input type="hiddem" name="idtel" value="${tel.idtelefono}"> ${tel.idtelefono}</td>
+                                <td >${tel.idtelefono}</td>
                                 <td id="tele">${tel.telefono}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update" onclick="${tel.idtelefono}">UPDATE</button>
-                                    <a href="Calificacion?action=consultarById&id=${tel.idtelefono}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${tel.idtelefono}', '${tel.telefono}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Calificacion?action=eliminar&id=', ${tel.idtelefono})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Telefono?action=eliminar&id=', ${tel.idtelefono})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
-                        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Telefono</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="Telefono?action=actualizar" method="POST" class="form">
-                                            <input name="idtelefono" type="hidden" value="${tel.idtelefono}">
-                                            <label>Telefono</label>
-                                            <input name="telefono" required="true" type="text" class="form-control" value="${tel.telefono}">
-                                            <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>   
-                    <script src="vendors/js/funciondelete.js"></script> 
+                        </c:forEach>   
                     </tbody>
                 </table>
             </div>
@@ -98,6 +73,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Telefono</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="Telefono?action=actualizar" method="POST" class="form">
+                        <input name="idtelefono" id="id" type="hidden" >
+                        <label>Telefono</label>
+                        <input name="telefono" id="telefono" required="true" type="text" class="form-control" >
+                        <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<script>
+    function editar(id, telefono) {
+        document.getElementById("id").value = id;
+        document.getElementById("telefono").value = telefono;
+    }
+</script>
+<script src="vendors/js/funciondelete.js"></script> 
 <jsp:include page="guest/footer.jsp"></jsp:include>
 

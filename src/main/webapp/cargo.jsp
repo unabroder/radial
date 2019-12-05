@@ -18,26 +18,26 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Telefonos</label>
+                    <label class="h3 text-white">Cargos</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">
                             <tr>
                                 <th>#</th>
                                 <th>Telefono</th>
-                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Telefono</button></th>
+                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Cargo</button></th>
                             </tr>
                         </thead>
 
                         <tbody class="bg-success">
-                        <c:forEach items="${lista}" var="tel">
+                        <c:forEach items="${lista}" var="cargo">
                             <tr>
-                                <td >${tel.idtelefono}</td>
-                                <td id="tele">${tel.telefono}</td>
+                                <td >${cargo.idcargo}</td>
+                                <td id="tele">${cargo.cargo}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${tel.idtelefono}', '${tel.telefono}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${cargo.idcargo}', '${cargo.cargo}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Telefono?action=eliminar&id=', ${tel.idtelefono})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Cargo?action=eliminar&id=', ${cargo.idcargo})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
                         </c:forEach>   
                     </tbody>
@@ -55,15 +55,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Cargo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=guardar" method="POST" class="form">
-                        <label>Telefono</label>
-                        <input name="telefono" required="true" type="text" class="form-control">
+                    <form action="Cargo?action=guardar" method="POST" class="form">
+                        <label>Cargo</label>
+                        <input name="cargo" required="true" type="text" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Guardar</button>
                     </form>
                 </div>
@@ -77,16 +77,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Telefono</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Cargo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Telefono?action=actualizar" method="POST" class="form">
-                        <input name="idtelefono" id="id" type="hidden" >
+                    <form action="Cargo?action=actualizar" method="POST" class="form">
+                        <input name="idcargo" id="id" type="hidden" >
                         <label>Telefono</label>
-                        <input name="telefono" id="telefono" required="true" type="text" class="form-control" >
+                        <input name="cargo" id="cargo" required="true" type="text" class="form-control" >
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -98,11 +98,10 @@
     </div>
 </section>
 <script>
-    function editar(id, telefono) {
+    function editar(id, cargo) {
         document.getElementById("id").value = id;
-        document.getElementById("telefono").value = telefono;
+        document.getElementById("cargo").value = cargo;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 
 <jsp:include page="guest/footer.jsp"></jsp:include>
-

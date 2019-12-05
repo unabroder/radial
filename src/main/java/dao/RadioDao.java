@@ -33,8 +33,11 @@ public class RadioDao {
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setString(1, rad.getNombre());
-            ps.executeQuery();
-            return true;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
