@@ -47,9 +47,10 @@ public class ProgramaDao {
         try {
             ps = conexion.conectar().prepareStatement(sql);
             GeneroBean gen = pro.getIdgenero();
-            ps.setString(1, gen.getGenero());
+            ps.setInt(1, gen.getIdgenero());
             ps.setString(2, pro.getNombre());
             ps.setString(3, pro.getDescripcion());
+            System.out.println("Dao" + gen.getIdgenero() + " " + pro.getNombre() + " " + pro.getDescripcion());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -62,7 +63,7 @@ public class ProgramaDao {
         try {
             ps = conexion.conectar().prepareStatement(sql);
             GeneroBean gen = pro.getIdgenero();
-            ps.setString(1, gen.getGenero());
+            ps.setInt(1, gen.getIdgenero());
             ps.setString(2, pro.getNombre());
             ps.setString(3, pro.getDescripcion());
             ps.setInt(4, pro.getIdprograma());
@@ -86,7 +87,7 @@ public class ProgramaDao {
     }
 
     public List<ProgramaBean> consultar() {
-        String sql = "SELECT pro.idprograma, pro.genero, pro.nombre, "
+        String sql = "SELECT pro.idprograma, pro.idgenero, pro.nombre, "
                 + " pro.descripcion, gen.genero FROM programas as pro "
                 + " INNER JOIN genero as gen ON gen.idgenero = pro.idgenero "
                 + " WHERE pro.estado = 1 ";
@@ -111,7 +112,7 @@ public class ProgramaDao {
     }
 
     public List<ProgramaBean> consultarById(int id) {
-        String sql = "SELECT pro.idprograma, pro.genero, pro.nombre, "
+        String sql = "SELECT pro.idprograma, pro.idgenero, pro.nombre, "
                 + " pro.descripcion, gen.genero FROM programas as pro "
                 + " INNER JOIN genero as gen ON gen.idgenero = pro.idgenero "
                 + " WHERE pro.idprograma = ? ";

@@ -1,3 +1,81 @@
+commit e916952e18f9e239c330241a38355f8675e67ab9
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Fri Dec 6 11:23:55 2019 -0600
+
+    vista de la radio
+
+commit 7d43e3f054ce7f5db0ae8e0adc3747b534706dec
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Thu Dec 5 16:49:26 2019 -0600
+
+    vista de personal
+
+commit 466ae42bb5a82f1591c494502a2290a6fab3677c
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Thu Dec 5 16:40:42 2019 -0600
+
+    vistas agregadas
+
+commit c315e5c6803be174382b2566a17569e77ab0e438
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Thu Dec 5 13:31:09 2019 -0600
+
+    Vista de telefono
+
+commit 3e642d206adb224d33d337c84cf76cf9abe3b37b
+Author: Roberto Antonio Alferes Gomez <roberto3652017@gmail.com>
+Date:   Wed Dec 4 22:44:45 2019 -0600
+
+    nuevos servlet agregados
+
+commit 2885eba1d0f7796928e4581a94ee4cc7a5f8000f
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Wed Dec 4 16:48:43 2019 -0600
+
+    nuevos servlet
+
+commit f853b455be3afc8e5d254837774d479552f9dc3a
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Wed Dec 4 14:09:54 2019 -0600
+
+    nueva vista de radios
+
+commit 26f320641838a9d23c87461b8a380f2d0b3cc747
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Mon Dec 2 16:51:15 2019 -0600
+
+    dos dao terminados emision y programa
+
+commit 9a96c2a2baffbaf41c52848cfcde40742fe3ea19
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Mon Dec 2 13:03:27 2019 -0600
+
+    modificacion de la base de datos
+
+commit 01ae529281cc9389edf8929cc79d54e07d21d5ea
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Mon Dec 2 10:51:55 2019 -0600
+
+    documentacion del proyecto
+
+commit bc64888c62eeff72ea7744827872f8ac4832b58e
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Mon Dec 2 09:35:44 2019 -0600
+
+    clases para los dao
+
+commit cf3e3c3d858661167de1e884e1f69632d87ecf5e
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Sat Nov 30 10:53:03 2019 -0600
+
+    modificacion de la pagina admin
+
+commit a46b42653b8ce39fe619bc5ef106dcfc0d3a0eaa
+Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
+Date:   Sat Nov 30 10:51:03 2019 -0600
+
+    commits del proyecto
+
 commit e58f5f12054a00bc724348deb511601c06ccb5c5
 Author: Roberto Antonio Alferes Gomez <ag1961012015@unab.edu.sv>
 Date:   Sat Nov 30 10:13:35 2019 -0600

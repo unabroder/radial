@@ -69,7 +69,7 @@ public class ProgramaServlet extends HttpServlet {
         List<ProgramaBean> lista = prodao.consultar();
         request.setAttribute("lista", lista);
         request.setAttribute("genero", genero);
-        rd = request.getRequestDispatcher("progrmas.jsp");
+        rd = request.getRequestDispatcher("programas.jsp");
         rd.forward(request, response);
     }
 
@@ -94,6 +94,7 @@ public class ProgramaServlet extends HttpServlet {
         pro.setIdgenero(gen);
         pro.setNombre(nombre);
         pro.setDescripcion(descripcion);
+        System.out.println(idgenero + " " + nombre + " " + descripcion);
         res = prodao.validar(pro);
         if (res) {
             msg = "Ya existe el programa";
@@ -102,10 +103,10 @@ public class ProgramaServlet extends HttpServlet {
             List<ProgramaBean> lista = prodao.consultar();
             request.setAttribute("lista", lista);
             request.setAttribute("genero", genero);
-            rd = request.getRequestDispatcher("progrmas.jsp");
+            rd = request.getRequestDispatcher("programas.jsp");
             rd.forward(request, response);
         } else {
-            res = gendao.guardar(gen);
+            res = prodao.guardar(pro);
             if (res) {
                 msg = "programa registrado";
             } else {
@@ -116,7 +117,7 @@ public class ProgramaServlet extends HttpServlet {
             List<ProgramaBean> lista = prodao.consultar();
             request.setAttribute("lista", lista);
             request.setAttribute("genero", genero);
-            rd = request.getRequestDispatcher("progrmas.jsp");
+            rd = request.getRequestDispatcher("programas.jsp");
             rd.forward(request, response);
         }
     }
@@ -140,10 +141,10 @@ public class ProgramaServlet extends HttpServlet {
             List<ProgramaBean> lista = prodao.consultar();
             request.setAttribute("lista", lista);
             request.setAttribute("genero", genero);
-            rd = request.getRequestDispatcher("progrmas.jsp");
+            rd = request.getRequestDispatcher("programas.jsp");
             rd.forward(request, response);
         } else {
-            res = gendao.guardar(gen);
+            res = prodao.actualizar(pro);
             if (res) {
                 msg = "programa actualizado";
             } else {
@@ -154,7 +155,7 @@ public class ProgramaServlet extends HttpServlet {
             List<ProgramaBean> lista = prodao.consultar();
             request.setAttribute("lista", lista);
             request.setAttribute("genero", genero);
-            rd = request.getRequestDispatcher("progrmas.jsp");
+            rd = request.getRequestDispatcher("programas.jsp");
             rd.forward(request, response);
         }
     }
@@ -173,7 +174,7 @@ public class ProgramaServlet extends HttpServlet {
         List<ProgramaBean> lista = prodao.consultar();
         request.setAttribute("lista", lista);
         request.setAttribute("genero", genero);
-        rd = request.getRequestDispatcher("progrmas.jsp");
+        rd = request.getRequestDispatcher("programas.jsp");
         rd.forward(request, response);
     }
 

@@ -123,7 +123,7 @@ public class GeneroServlet extends HttpServlet {
             rd = request.getRequestDispatcher("genero.jsp");
             rd.forward(request, response);
         } else {
-            res = gendao.guardar(gen);
+            res = gendao.actualizar(gen);
             if (res) {
                 msg = "genero actualizado";
             } else {
