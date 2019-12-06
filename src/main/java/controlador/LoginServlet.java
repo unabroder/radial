@@ -52,6 +52,9 @@ public class LoginServlet extends HttpServlet {
             case "registrar":
                 registrate(request, response);
                 break;
+            case "logout":
+                salir(request, response);
+                break;
         }
     }
 
@@ -87,6 +90,13 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("lista", lista);
         rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
         rd.forward(request, response);
+    }
+
+    protected void salir(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession sesion = request.getSession(true);
+        sesion.invalidate();
+        response.sendRedirect("index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

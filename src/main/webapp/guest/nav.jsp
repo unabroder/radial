@@ -33,7 +33,7 @@
                 </div>
             </li>
             <a class="nav-item nav-link" href="#">Link</a>
-            <a class="nav-item nav-link" href="#">Link</a>
+            <a class="nav-item nav-link" href="Login?action=logout">Cerrar Sesion</a>
         </nav>
     </div>
 </div>
