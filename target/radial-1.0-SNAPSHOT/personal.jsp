@@ -67,19 +67,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Usuario?action=insert" method="POST" class="form">
-
-                        <label>Rol del usuario</label>
-                        <select name="idtipo" class="form-control">
-                            <option>Seleccione un rol</option>
-                            <c:forEach items="${tipo}" var="tipo">
-                                <option value="${tipo.idtipo}">${tipo.tipo}</option>
+                    <form action="Personal?action=guardar" method="POST" class="form">
+                        <label>Compañia Productora</label>
+                        <select name="idproductora" class="form-control">
+                            <option>Seleccione una productora</option>
+                            <c:forEach items="${listapro}" var="pro">
+                                <option value="${pro.idproductora}">${pro.numbre}</option>
                             </c:forEach>
                         </select>
-                        <label>Usuario</label>
-                        <input name="usuario" required="true" type="text" class="form-control">
-                        <label>Ingrese la clave</label>
-                        <input name="clave" required="true" type="password" class="form-control">
+                        <label>Seleccione el cargo</label>
+                        <select name="idcargo" class="form-control">
+                            <option>Seleccione un rol</option>
+                            <c:forEach items="${listacargo}" var="cargo">
+                                <option value="${cargo.idcargo}">${cargo.cargo}</option>
+                            </c:forEach>
+                        </select>
+                        <label>Nombre</label>
+                        <input name="nombre" required="true" type="text" class="form-control">
+                        <label>Apellido</label>
+                        <input name="apellido" required="true" type="text" class="form-control">
+                        <label>Numero unico de identificación</label>
+                        <input name="dui" required="true" type="text" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Guardar</button>
                     </form>
                 </div>
@@ -93,33 +101,48 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Personal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Usuario?action=update" method="POST" class="form">
-                        <input type="hidden" name="idusuario" id='id'>
-                        <label>Rol del usuario</label>
-                        <select name="idtipo" class="form-control" id="idtipo">
-                            <option>Seleccione un rol</option>
-                            <c:forEach items="${tipo}" var="tipo">
+                    <form action="Personal?action=actualizar" method="POST" class="form">
+                        <input type="hidden" name="idpersonal" id='id'>
+                        <label>Compañia Productora</label>
+                        <select name="idproductora" class="form-control" id="idproductora">
+                            <option>Seleccione una productora</option>
+                            <c:forEach items="${listapro}" var="pro">
                                 <c:choose>
-                                    <c:when test="${tipo.idtipo == id}">
-                                        <option value="${tipo.idtipo}">${tipo.tipo}</option>
+                                    <c:when test="${pro.idproductora == idproductora}">
+                                        <option value="${pro.idproductora}" selected="true">${pro.numbre}</option>
                                     </c:when>
                                     <c:otherwise>
-                                        <option value="${tipo.idtipo}">${tipo.tipo}</option>
+                                        <option value="${pro.idproductora}">${pro.numbre}</option>
                                     </c:otherwise>
                                 </c:choose>
-
                             </c:forEach>
                         </select>
-                        <label>Usuario</label>
-                        <input name="usuario" required="true" type="text" class="form-control" id="usuario">
-                        <label>Ingrese la clave</label>
-                        <input name="clave" required="true" type="password" class="form-control" >
+                        <label>Seleccione el cargo</label>
+                        <select name="idcargo" class="form-control" id="idcargo">
+                            <option>Seleccione un rol</option>
+                            <c:forEach items="${listacargo}" var="cargo">
+                                <c:choose>
+                                    <c:when test="${cargo.idcargo == idcargo}">
+                                        <option value="${cargo.idcargo}">${cargo.cargo}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${cargo.idcargo}">${cargo.cargo}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                        <label>Nombre</label>
+                        <input name="nombre" required="true" type="text" class="form-control" id="nombre">
+                        <label>Apellido</label>
+                        <input name="apellido" required="true" type="text" class="form-control" id="apellido">
+                        <label>Numero unico de identificación</label>
+                        <input name="dui" required="true" type="text" class="form-control" id="dui">
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -131,10 +154,13 @@
     </div>
 </section>
 <script>
-    function editar(id, idtipo, usuario) {
+    function editar(id, idproductora, idcargo, nombre, apellido, dui) {
         document.getElementById("id").value = id;
-        document.getElementById("idtipo").value = idtipo;
-        document.getElementById("usuario").value = usuario;
+        document.getElementById("idproductora").value = idproductora;
+        document.getElementById("idcargo").value = idcargo;
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("apellido").value = apellido;
+        document.getElementById("dui").value = dui;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 

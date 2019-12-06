@@ -97,7 +97,7 @@ public class PersonalServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String dui = request.getParameter("dui");
-
+        System.out.println(idproductora + " " + idcargo + " " + nombre + " " + apellido + " " + dui);
         PersonalBean per = new PersonalBean(0);
         ProductoraBean productora = new ProductoraBean(idproductora);
         CargoBean cargo = new CargoBean(idcargo);
@@ -154,35 +154,22 @@ public class PersonalServlet extends HttpServlet {
         per.setNombre(nombre);
         per.setApellido(apellido);
         per.setDui(dui);
-        res = perdao.validar(per);
+
+        res = perdao.actualizar(per);
         if (res) {
-            msg = "Ya existe el personal";
-            request.setAttribute("msg", msg);
-            List<PersonalBean> lista = perdao.consultar();
-            List<ProductoraBean> listapro = prodao.consultar();
-            List<CargoBean> listacargo = cardao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("listapro", listapro);
-            request.setAttribute("listacargo", listacargo);
-            rd = request.getRequestDispatcher("personal.jsp");
-            rd.forward(request, response);
+            msg = "Persona actualizada";
         } else {
-            res = perdao.actualizar(per);
-            if (res) {
-                msg = "Persona registrada";
-            } else {
-                msg = "Error al guardar";
-            }
-            request.setAttribute("msg", msg);
-            List<PersonalBean> lista = perdao.consultar();
-            List<ProductoraBean> listapro = prodao.consultar();
-            List<CargoBean> listacargo = cardao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("listapro", listapro);
-            request.setAttribute("listacargo", listacargo);
-            rd = request.getRequestDispatcher("personal.jsp");
-            rd.forward(request, response);
+            msg = "Error al guardar";
         }
+        request.setAttribute("msg", msg);
+        List<PersonalBean> lista = perdao.consultar();
+        List<ProductoraBean> listapro = prodao.consultar();
+        List<CargoBean> listacargo = cardao.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("listapro", listapro);
+        request.setAttribute("listacargo", listacargo);
+        rd = request.getRequestDispatcher("personal.jsp");
+        rd.forward(request, response);
     }
 
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)

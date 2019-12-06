@@ -37,7 +37,7 @@
                                 <td id="tele">${usu.idtipo.tipo}</td>
                                 <td id="tele">${usu.usuario}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${usu.idusuario}', '${usu.idtipo.idtipo}', '${usu.usuario}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${usu.idusuario}', '${usu.idtipo.idtipo}', '${usu.usuario}', '${usu.clave}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
                                 <td><button class="btn btn-danger" onclick="alerta_eliminar('Usuario?action=eliminar&id=', ${usu.idusuario})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
@@ -103,7 +103,7 @@
                             <c:forEach items="${tipo}" var="tipo">
                                 <c:choose>
                                     <c:when test="${tipo.idtipo == id}">
-                                        <option value="${tipo.idtipo}">${tipo.tipo}</option>
+                                        <option value="${tipo.idtipo}" selected="true">${tipo.tipo}</option>
                                     </c:when>
                                     <c:otherwise>
                                         <option value="${tipo.idtipo}">${tipo.tipo}</option>
@@ -115,7 +115,7 @@
                         <label>Usuario</label>
                         <input name="usuario" required="true" type="text" class="form-control" id="usuario">
                         <label>Ingrese la clave</label>
-                        <input name="clave" required="true" type="password" class="form-control" >
+                        <input name="clave" required="true" type="password" class="form-control" id="clave">
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -127,10 +127,11 @@
     </div>
 </section>
 <script>
-    function editar(id, idtipo, usuario) {
+    function editar(id, idtipo, usuario, clave) {
         document.getElementById("id").value = id;
         document.getElementById("idtipo").value = idtipo;
         document.getElementById("usuario").value = usuario;
+        document.getElementById("clave").value = clave;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 

@@ -9,10 +9,10 @@
                     <a class="dropdown-item" href="Telefono?action=consultar">Telefonos</a>
                     <a class="dropdown-item" href="Productora?action=consultar">Productoras</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                    <a class="dropdown-item" href="Frecuencia?action=consultar">Frecuencia</a>
                 </div>
             </li>
-             <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuarios</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="TipoUsuario?action=consultar">Tipos de Usuarios</a>

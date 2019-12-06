@@ -118,28 +118,19 @@ public class FrecuenciaServlet extends HttpServlet {
         FrecuenciaBean fre = new FrecuenciaBean(idfrecuencia);
         fre.setFrecuencia(frecuencia);
         fre.setTipo(tipo);
-        res = fredao.validar(fre);
-        if (res) {
-            msg = "la frecuencia ya esta registrada";
-            List<FrecuenciaBean> lista = fredao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("frecuencia.jsp");
-            rd.forward(request, response);
-        } else {
-            res = fredao.actualizar(fre);
-            if (res) {
-                msg = "frecuencia actualizada";
-            } else {
-                msg = "frecuencia no actualizada";
-            }
 
-            List<FrecuenciaBean> lista = fredao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("frecuencia.jsp");
-            rd.forward(request, response);
+        res = fredao.actualizar(fre);
+        if (res) {
+            msg = "frecuencia actualizada";
+        } else {
+            msg = "frecuencia no actualizada";
         }
+
+        List<FrecuenciaBean> lista = fredao.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("msg", msg);
+        rd = request.getRequestDispatcher("frecuencia.jsp");
+        rd.forward(request, response);
     }
 
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)

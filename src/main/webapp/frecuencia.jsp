@@ -18,28 +18,28 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Usuarios</label>
+                    <label class="h3 text-white">Frecuencias</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">
                             <tr>
                                 <th>#</th>
+                                <th>Frecuencia</th>
                                 <th>Tipo</th>
-                                <th>Usuario</th>
-                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Usuario</button></th>
+                                <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar Frecuencia</button></th>
                             </tr>
                         </thead>
 
                         <tbody class="bg-success">
-                        <c:forEach items="${lista}" var="usu">
+                        <c:forEach items="${lista}" var="fre">
                             <tr>
-                                <td >${usu.idusuario}</td>
-                                <td id="tele">${usu.idtipo.tipo}</td>
-                                <td id="tele">${usu.usuario}</td>
+                                <td >${fre.idfrecuencia}</td>
+                                <td id="tele">${fre.frecuencia}</td>
+                                <td id="tele">${fre.tipo}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${usu.idusuario}', '${usu.idtipo.idtipo}', '${usu.usuario}', '${usu.clave}')"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#update" onclick="editar('${fre.idfrecuencia}', '${fre.frecuencia}', '${fre.tipo}')"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
-                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Usuario?action=eliminar&id=', ${usu.idusuario})"><a><i class="fas fa-trash-alt"></i></a></button></td>
+                                <td><button class="btn btn-danger" onclick="alerta_eliminar('Telefono?action=eliminar&id=', ${fre.idfrecuencia})"><a><i class="fas fa-trash-alt"></i></a></button></td>
                             </tr>
                         </c:forEach>   
                     </tbody>
@@ -57,25 +57,21 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Agregar Frecuencia</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Usuario?action=insert" method="POST" class="form">
-
-                        <label>Rol del usuario</label>
-                        <select name="idtipo" class="form-control">
-                            <option>Seleccione un rol</option>
-                            <c:forEach items="${tipo}" var="tipo">
-                                <option value="${tipo.idtipo}">${tipo.tipo}</option>
-                            </c:forEach>
+                    <form action="Frecuencia?action=guardar" method="POST" class="form">
+                        <label>Frecuencia</label>
+                        <input name="frecuencia" required="true" type="text" class="form-control">
+                        <label>Tipo</label>
+                        <select name="tipo" class="form-control">
+                            <option>Seleccione una opcion</option>
+                            <option>AM</option>
+                            <option>PM</option>
                         </select>
-                        <label>Usuario</label>
-                        <input name="usuario" required="true" type="text" class="form-control">
-                        <label>Ingrese la clave</label>
-                        <input name="clave" required="true" type="password" class="form-control">
                         <button type="submit" class="btn btn-primary mt-2 ">Guardar</button>
                     </form>
                 </div>
@@ -89,33 +85,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Frecuencia</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="Usuario?action=update" method="POST" class="form">
-                        <input type="hidden" name="idusuario" id='id'>
-                        <label>Rol del usuario</label>
-                        <select name="idtipo" class="form-control" id="idtipo">
-                            <option>Seleccione un rol</option>
-                            <c:forEach items="${tipo}" var="tipo">
-                                <c:choose>
-                                    <c:when test="${tipo.idtipo == id}">
-                                        <option value="${tipo.idtipo}" selected="true">${tipo.tipo}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${tipo.idtipo}">${tipo.tipo}</option>
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </c:forEach>
+                    <form action="Frecuencia?action=actualizar" method="POST" class="form">
+                        <input name="idfrecuencia" id="id" type="hidden" >
+                        <label>Frecuencia</label>
+                        <input name="frecuencia" required="true" type="text" class="form-control" id="frecuencia">
+                        <label>Tipo</label>
+                        <select name="tipo" id="tipo" class="form-control">
+                            <option>Seleccione una opcion</option>
+                            <option>AM</option>
+                            <option>PM</option>
                         </select>
-                        <label>Usuario</label>
-                        <input name="usuario" required="true" type="text" class="form-control" id="usuario">
-                        <label>Ingrese la clave</label>
-                        <input name="clave" required="true" type="password" class="form-control" id="clave">
                         <button type="submit" class="btn btn-primary mt-2 ">Actualizar</button>
                     </form>
                 </div>
@@ -127,11 +112,10 @@
     </div>
 </section>
 <script>
-    function editar(id, idtipo, usuario, clave) {
+    function editar(id, frecuencia, tipo) {
         document.getElementById("id").value = id;
-        document.getElementById("idtipo").value = idtipo;
-        document.getElementById("usuario").value = usuario;
-        document.getElementById("clave").value = clave;
+        document.getElementById("frecuencia").value = frecuencia;
+        document.getElementById("tipo").value = tipo;
     }
 </script>
 <script src="vendors/js/funciondelete.js"></script> 

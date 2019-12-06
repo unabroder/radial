@@ -157,31 +157,20 @@ public class UsuarioServlet extends HttpServlet {
         usu.setUsuario(usuario);
         usu.setClave(pass);
 
-        res = usuDao.validar(usu);
+        res = usuDao.actualizar(usu);
         if (res) {
-            msg = "existe";
-            List<UsuarioBean> lista = usuDao.consultar();
-            List<TipoUsuario> tipo = tipoD.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("tipo", tipo);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("usuarios.jsp");
-            rd.forward(request, response);
+            msg = "Se actualizo correctamente";
         } else {
-            res = usuDao.actualizar(usu);
-            if (res) {
-                msg = "noexiste";
-            } else {
-                msg = "existe";
-            }
-            List<UsuarioBean> lista = usuDao.consultar();
-            List<TipoUsuario> tipo = tipoD.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("tipo", tipo);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("usuarios.jsp");
-            rd.forward(request, response);
+            msg = "existe";
         }
+        List<UsuarioBean> lista = usuDao.consultar();
+        List<TipoUsuario> tipo = tipoD.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("msg", msg);
+        rd = request.getRequestDispatcher("usuarios.jsp");
+        rd.forward(request, response);
+
     }
 
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)

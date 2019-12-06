@@ -148,36 +148,24 @@ public class RadioServlet extends HttpServlet {
         radio.setIdproductora(productora);
         radio.setIdfrecuencia(frecuencia);
         radio.setNombre(nombre);
-        res = radao.validar(radio);
-        if (res) {
-            msg = "la radio ya esta registrada";
-            List<RadioBean> lista = radao.consultar();
-            List<FrecuenciaBean> frec = fredao.consultar();
-            List<ProductoraBean> pro = prodao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("frec", frec);
-            request.setAttribute("productora", pro);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("radio.jsp");
-            rd.forward(request, response);
-        } else {
-            res = radao.guardar(radio);
-            if (res) {
-                msg = "radio registrada";
-            } else {
-                msg = "radio no registrada";
-            }
 
-            List<RadioBean> lista = radao.consultar();
-            List<FrecuenciaBean> frec = fredao.consultar();
-            List<ProductoraBean> pro = prodao.consultar();
-            request.setAttribute("lista", lista);
-            request.setAttribute("frec", frec);
-            request.setAttribute("productora", pro);
-            request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("radio.jsp");
-            rd.forward(request, response);
+        res = radao.actualizar(radio);
+        if (res) {
+            msg = "radio actualizada";
+        } else {
+            msg = "radio no actualizada";
         }
+
+        List<RadioBean> lista = radao.consultar();
+        List<FrecuenciaBean> frec = fredao.consultar();
+        List<ProductoraBean> pro = prodao.consultar();
+        request.setAttribute("lista", lista);
+        request.setAttribute("frec", frec);
+        request.setAttribute("productora", pro);
+        request.setAttribute("msg", msg);
+        rd = request.getRequestDispatcher("radio.jsp");
+        rd.forward(request, response);
+
     }
 
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)

@@ -19,15 +19,15 @@ import modelo.RadioBean;
  * @author roberto.alferesusam
  */
 public class RadioDao {
-
+    
     Conexion conexion;
     PreparedStatement ps;
     ResultSet rs;
-
+    
     public RadioDao(Conexion conexion) {
         this.conexion = conexion;
     }
-
+    
     public boolean validar(RadioBean rad) {
         String sql = "SELECT nombre FROM radio WHERE radio = ?";
         try {
@@ -42,7 +42,7 @@ public class RadioDao {
             return false;
         }
     }
-
+    
     public boolean guardar(RadioBean rad) {
         String sql = "INSERT INTO radio(idproductora, idfrecuencia, nombre) VALUES(?,?,?)";
         try {
@@ -58,7 +58,7 @@ public class RadioDao {
             return false;
         }
     }
-
+    
     public boolean actualizar(RadioBean rad) {
         String sql = "UPDATE radio SET idproductora = ?, idfrecuencia = ?, nombre = ? WHERE idradio = ?";
         try {
@@ -75,7 +75,7 @@ public class RadioDao {
             return false;
         }
     }
-
+    
     public boolean eliminar(int id) {
         String sql = "UPDATE radio SET estado = 0 WHERE idradio = ?";
         try {
@@ -87,10 +87,10 @@ public class RadioDao {
             return false;
         }
     }
-
+    
     public List<RadioBean> consultar() {
         String sql = "SELECT rad.idradio, rad.idproductora, rad.idfrecuencia, rad.nombre, "
-                + " pro.numbre, fre.frecuencia FROM radio as rad "
+                + " pro.numbre, fre.frecuencia, fre.tipo FROM radio as rad "
                 + " INNER JOIN productora as pro ON pro.idproductora = rad.idproductora "
                 + " INNER JOIN frecuencia as fre ON fre.idfrecuencia = rad.idfrecuencia "
                 + " WHERE rad.estado = 1";
@@ -108,6 +108,7 @@ public class RadioDao {
                 rad.setNombre(rs.getString("nombre"));
                 pro.setNumbre(rs.getString("numbre"));
                 fre.setFrecuencia(rs.getDouble("frecuencia"));
+                fre.setTipo(rs.getString("tipo"));
                 System.out.println("radios");
                 lista.add(rad);
             }
@@ -116,7 +117,7 @@ public class RadioDao {
             return null;
         }
     }
-
+    
     public List<RadioBean> consultarById(int id) {
         String sql = "SELECT rad.idradio, rad.idproductora, rad.idfrecuencia, rad.nombre, "
                 + " pro.numbre, fre.frecuencia FROM radio as rad "
@@ -145,5 +146,5 @@ public class RadioDao {
             return null;
         }
     }
-
+    
 }
