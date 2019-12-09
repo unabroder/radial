@@ -95,7 +95,6 @@ public class EmisionServlet extends HttpServlet {
         LocalTime horainicio = LocalTime.parse(request.getParameter("horainicio"));
         LocalTime duracion = LocalTime.parse(request.getParameter("duracion"));
         String repeticion = request.getParameter("repeticion");
-
         EmisionBean emi = new EmisionBean(0);
         ProgramaBean pro = new ProgramaBean(idprograma);
         emi.setIdprograma(pro);
@@ -103,7 +102,6 @@ public class EmisionServlet extends HttpServlet {
         emi.setHorainicio(horainicio);
         emi.setDuracion(duracion);
         emi.setRepeticion(repeticion);
-
         res = emidao.guardar(emi);
         if (res) {
             msg = "Emision registrada";

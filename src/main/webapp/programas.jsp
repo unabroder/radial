@@ -18,7 +18,7 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Progrmas</label>
+                    <label class="h3 text-white">Programas</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">

@@ -25,13 +25,15 @@ public class EmisionDao {
     PreparedStatement ps;
     ResultSet rs;
     SimpleDateFormat formato = new SimpleDateFormat("yy-MM-dd");
+    int estado;
     
     public EmisionDao(Conexion conexion) {
         this.conexion = conexion;
     }
     
     public boolean guardar(EmisionBean emi) {
-        String sql = "INSERT INTO emison(idprograma, fecha, horainicio, duracion, repeticion) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO emision(idprograma, fecha, horainicio, duracion, repeticion, estado) VALUES(?,?,?,?,?,?)";
+        estado = 1;
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ProgramaBean pro = emi.getIdprograma();
@@ -40,6 +42,8 @@ public class EmisionDao {
             ps.setString(3, emi.getHorainicio().toString());
             ps.setString(4, emi.getDuracion().toString());
             ps.setString(5, emi.getRepeticion());
+            ps.setInt(6, estado);
+            System.out.println(pro.getIdprograma() + " " + emi.getFecha() + " " + emi.getHorainicio() + " " + emi.getDuracion() + " " + emi.getRepeticion() + " " + estado);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -48,7 +52,7 @@ public class EmisionDao {
     }
     
     public boolean actualizar(EmisionBean emi) {
-        String sql = "UPDATE emison SET idprograma = ?, fecha = ?, horainicio = ?, "
+        String sql = "UPDATE emision SET idprograma = ?, fecha = ?, horainicio = ?, "
                 + "duracion = ?, repeticion = ? WHERE idemision = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
@@ -67,7 +71,7 @@ public class EmisionDao {
     }
     
     public boolean eliminar(int id) {
-        String sql = "UPDATE emison SET estado = 0 WHERE idemision = ?";
+        String sql = "UPDATE emision SET estado = 0 WHERE idemision = ?";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             ps.setInt(1, id);
@@ -80,7 +84,7 @@ public class EmisionDao {
     
     public List<EmisionBean> consultar() {
         String sql = "SELECT emi.idemision, emi.idprograma, emi.fecha, "
-                + " emi.horainicio, emi.duracion, pro.nombre FROM emision as emi "
+                + " emi.horainicio, emi.duracion, emi.repeticion, pro.nombre FROM emision as emi "
                 + "INNER JOIN programas as pro ON pro.idprograma = emi.idprograma "
                 + " WHERE emi.estado = 1";
         try {
@@ -96,6 +100,7 @@ public class EmisionDao {
                 emi.setHorainicio(LocalTime.parse(rs.getString("horainicio")));
                 emi.setDuracion(LocalTime.parse(rs.getString("duracion")));
                 emi.setRepeticion(rs.getString("repeticion"));
+                pro.setNombre(rs.getString("nombre"));
                 lista.add(emi);
             }
             return lista;
@@ -106,7 +111,7 @@ public class EmisionDao {
     
     public List<EmisionBean> consultarById(int id) {
         String sql = "SELECT emi.idemision, emi.idprograma, emi.fecha, "
-                + " emi.horainicio, emi.duracion, pro.nombre FROM emision as emi "
+                + " emi.horainicio, emi.duracion, emi.repeticion, pro.nombre FROM emision as emi "
                 + "INNER JOIN programas as pro ON pro.idprograma = emi.idprograma "
                 + " WHERE emi.idemision = ?";
         try {
@@ -123,6 +128,7 @@ public class EmisionDao {
                 emi.setHorainicio(LocalTime.parse(rs.getString("horainicio")));
                 emi.setDuracion(LocalTime.parse(rs.getString("duracion")));
                 emi.setRepeticion(rs.getString("repeticion"));
+                pro.setNombre(rs.getString("nombre"));
                 lista.add(emi);
             }
             return lista;

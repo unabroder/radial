@@ -27,7 +27,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="Genero?action=consultar">Genero</a>
                     <a class="dropdown-item" href="Programa?action=consultar">Programas</a>
-                    <a class="dropdown-item" href="Cargo?action=consultar">Cargos</a>
+                    <a class="dropdown-item" href="Emision?action=consultar">Emision</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="Personal?action=consultar">Personal</a>
                 </div>
