@@ -17,6 +17,7 @@ dao\TelefonoDao.class
 modelo\ProgramaBean.class
 modelo\RadioBean.class
 modelo\ResumenBean.class
+modelo\TelefonoByProductora.class
 controlador\ProgramaServlet.class
 modelo\CargoBean.class
 conexion\PruebaConexion.class

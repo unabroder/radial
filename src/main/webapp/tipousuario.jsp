@@ -18,13 +18,13 @@
             <div class="row text-center">
 
                 <div class="col-12 mt-3">
-                    <label class="h3 text-white">Telefonos</label>
+                    <label class="h3 text-white">Tipo Usuario</label>
                     <hr class="my-2 bg-warning">
                     <table class="table table-hover border-bottom" >
                         <thead class="bg-warning">
                             <tr>
                                 <th>#</th>
-                                <th>Telefono</th>
+                                <th>Tipo</th>
                                 <th colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tipo Usuario</button></th>
                             </tr>
                         </thead>

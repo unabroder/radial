@@ -69,12 +69,10 @@ public class LoginServlet extends HttpServlet {
         log.setClave(pass);
 
         res = logD.login(log);
-
         if (res) {
             HttpSession sesion = request.getSession(true);
             sesion.setAttribute("usuario", log.getUsuario());
             System.out.println(log.getUsuario());
-            sesion.setAttribute("tipo", log.getIdtipo());
             response.sendRedirect("admin.jsp");
         } else {
             msg = "login";
@@ -82,6 +80,7 @@ public class LoginServlet extends HttpServlet {
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
+
     }
 
     protected void registrate(HttpServletRequest request, HttpServletResponse response)
@@ -94,8 +93,8 @@ public class LoginServlet extends HttpServlet {
 
     protected void salir(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sesion = request.getSession(true);
-        sesion.invalidate();
+        HttpSession session = request.getSession(false);
+        session.invalidate();
         response.sendRedirect("index.jsp");
     }
 

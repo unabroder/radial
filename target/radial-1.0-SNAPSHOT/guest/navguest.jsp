@@ -18,16 +18,7 @@
                     <a class="dropdown-item" href="Frecuencia?action=consultar">Frecuencia</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white text-weight-bold" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuarios</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="TipoUsuario?action=consultar">Tipos de Usuarios</a>
-                    <a class="dropdown-item" href="Usuario?action=consultar">Usuarios</a>
-                    <a class="dropdown-item" href="Cargo?action=consultar">Cargos</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="Personal?action=consultar">Personal</a>
-                </div>
-            </li>
+       
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white text-weight-bold" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Programas</a>
                 <div class="dropdown-menu">

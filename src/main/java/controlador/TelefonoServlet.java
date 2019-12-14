@@ -6,6 +6,7 @@
 package controlador;
 
 import conexion.Conexion;
+import dao.ProductoraDao;
 import dao.TelefonoDao;
 import java.io.IOException;
 import java.util.List;
@@ -14,7 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.ProductoraBean;
 import modelo.TelefonoBean;
+import modelo.TelefonoByProductora;
 
 /**
  *
@@ -27,6 +30,7 @@ public class TelefonoServlet extends HttpServlet {
     String msg;
     Conexion conexion = new Conexion();
     TelefonoDao teldao = new TelefonoDao(conexion);
+    ProductoraDao prodao = new ProductoraDao(conexion);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -149,6 +153,44 @@ public class TelefonoServlet extends HttpServlet {
         request.setAttribute("msg", msg);
         List<TelefonoBean> lista = teldao.consultar();
         request.setAttribute("lista", lista);
+        rd = request.getRequestDispatcher("telefono.jsp");
+        rd.forward(request, response);
+    }
+
+    protected void telpro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int idtel = Integer.parseInt(request.getParameter("idtelefono"));
+        int idpro = Integer.parseInt(request.getParameter("idproductora"));
+        TelefonoBean tel = new TelefonoBean(idtel);
+        ProductoraBean pro = new ProductoraBean(idpro);
+        TelefonoByProductora telpro = new TelefonoByProductora();
+        telpro.setIdproductora(pro);
+        telpro.setIdtelefono(tel);
+        res = teldao.telfonobyproductora(telpro);
+        if (res) {
+            msg = "La propductora registro su telefono";
+        } else {
+            msg = "la productora no registro su telefono";
+        }
+        request.setAttribute("msg", msg);
+        List<TelefonoBean> listatel = teldao.consultar();
+        List<ProductoraBean> listapro = prodao.consultar();
+        List<TelefonoByProductora> telbypro = teldao.mostrarTelefonos();
+        request.setAttribute("listatel", listatel);
+        request.setAttribute("listapro", listapro);
+        request.setAttribute("telpro", telbypro);
+        rd = request.getRequestDispatcher("telefono.jsp");
+        rd.forward(request, response);
+    }
+
+    protected void mostrarTelpro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<TelefonoBean> listatel = teldao.consultar();
+        List<ProductoraBean> listapro = prodao.consultar();
+        List<TelefonoByProductora> telpro = teldao.mostrarTelefonos();
+        request.setAttribute("listatel", listatel);
+        request.setAttribute("listapro", listapro);
+        request.setAttribute("telpro", telpro);
         rd = request.getRequestDispatcher("telefono.jsp");
         rd.forward(request, response);
     }

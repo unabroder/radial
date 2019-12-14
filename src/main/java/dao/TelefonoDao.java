@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
+import modelo.ProductoraBean;
 import modelo.TelefonoBean;
+import modelo.TelefonoByProductora;
 
 /**
  *
@@ -107,6 +109,45 @@ public class TelefonoDao {
                 tel = new TelefonoBean(rs.getInt("idtelefono"));
                 tel.setTelefono(rs.getString("telefono"));
                 lista.add(tel);
+            }
+            return lista;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean telfonobyproductora(TelefonoByProductora telpro) {
+        String sql = "INSERT INTO telefonosproductora VALUES(?,?)";
+        try {
+            TelefonoBean tel = telpro.getIdtelefono();
+            ProductoraBean pro = telpro.getIdproductora();
+            ps = conexion.conectar().prepareStatement(sql);
+            ps.setInt(1, pro.getIdproductora());
+            ps.setInt(2, tel.getIdtelefono());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public List<TelefonoByProductora> mostrarTelefonos() {
+        String sql = " select telpro.idproductora, telpro.idtelefono, pro.numbre, tel.telefono "
+                + "   from telefonosproductora as telpro "
+                + " inner join productora as pro ON pro.idproductora = telpro.idproductora "
+                + " inner join telefono as tel ON tel.idtelefono = telpro.idtelefono ;";
+        try {
+            TelefonoByProductora telpro;
+            List<TelefonoByProductora> lista = new LinkedList<>();
+            ps = conexion.conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                TelefonoBean tel = new TelefonoBean(rs.getInt("idtelefono"));
+                ProductoraBean pro = new ProductoraBean(rs.getInt("idproductora"));
+                telpro = new TelefonoByProductora();
+                telpro.setIdproductora(pro);
+                telpro.setIdtelefono(tel);
+                lista.add(telpro);
             }
             return lista;
         } catch (Exception e) {

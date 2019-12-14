@@ -30,7 +30,7 @@ public class EncuestaDao {
 
     public boolean guardar(EncuestaBean enc) {
         String sql = "INSERT INTO encuesta(idemision, idprograma, total,"
-                + " aprobacion, rechazo, indeferencia) VALUES(?,?,?,?,?,?)";
+                + " aprobacion, rechazo, indiferencia) VALUES(?,?,?,?,?,?)";
         try {
             EmisionBean emi = enc.getIdemision();
             ProgramaBean pro = enc.getIdprograma();
@@ -50,7 +50,7 @@ public class EncuestaDao {
 
     public boolean actualizar(EncuestaBean enc) {
         String sql = "UPDATE encuesta SET idemision = ?, idprograma = ?, total = ?,"
-                + " aprobacion = ?, rechazo = ?, indeferencia = ? WHERE idencuesta = ?";
+                + " aprobacion = ?, rechazo = ?, indiferencia = ? WHERE idencuesta = ?";
         try {
             EmisionBean emi = enc.getIdemision();
             ProgramaBean pro = enc.getIdprograma();
@@ -83,7 +83,7 @@ public class EncuestaDao {
 
     public List<EncuestaBean> consultar() {
         String sql = "SELECT enc.idencuesta, enc.idemision, enc.idprograma, "
-                + " enc.total, enc.aprobacion, enc.rechazo, enc.indiferencia "
+                + " enc.total, enc.aprobacion, enc.rechazo, enc.indiferencia, "
                 + " emi.fecha, pro.nombre FROM encuesta AS enc "
                 + " INNER JOIN emision AS emi ON emi.idemision = enc.idemision "
                 + " INNER JOIN programas AS pro ON pro.idprograma = enc.idprograma "
@@ -94,15 +94,17 @@ public class EncuestaDao {
             ps = conexion.conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                enc = new EncuestaBean(rs.getInt("idencuesta"));
-                EmisionBean emi = new EmisionBean(rs.getInt("idemision"));
-                ProgramaBean pro = new ProgramaBean(rs.getInt("idprograma"));
+                enc = new EncuestaBean(rs.getInt("enc.idencuesta"));
+                EmisionBean emi = new EmisionBean(rs.getInt("enc.idemision"));
+                ProgramaBean pro = new ProgramaBean(rs.getInt("enc.idprograma"));
                 enc.setIdemision(emi);
                 enc.setIdprograma(pro);
-                enc.setTotal(rs.getInt("total"));
-                enc.setAprobacion(rs.getInt("aprobacion"));
-                enc.setRechazo(rs.getInt("rechazo"));
-                enc.setIdencuesta(rs.getInt("indiferencia"));
+                enc.setTotal(rs.getInt("enc.total"));
+                enc.setAprobacion(rs.getInt("enc.aprobacion"));
+                enc.setRechazo(rs.getInt("enc.rechazo"));
+                enc.setIndiferencia(rs.getInt("enc.indiferencia"));
+                emi.setFecha(rs.getDate("emi.fecha"));
+                pro.setNombre(rs.getString("pro.nombre"));
                 lista.add(enc);
             }
             return lista;
@@ -113,7 +115,7 @@ public class EncuestaDao {
 
     public List<EncuestaBean> consultarById(int id) {
         String sql = "SELECT enc.idencuesta, enc.idemision, enc.idprograma, "
-                + " enc.total, enc.aprobacion, enc.rechazo, enc.indiferencia "
+                + " enc.total, enc.aprobacion, enc.rechazo, enc.indiferencia, "
                 + " emi.fecha, pro.nombre FROM encuesta AS enc "
                 + " INNER JOIN emision AS emi ON emi.idemision = enc.idemision "
                 + " INNER JOIN programas AS pro ON pro.idprograma = enc.idprograma "
@@ -133,7 +135,9 @@ public class EncuestaDao {
                 enc.setTotal(rs.getInt("total"));
                 enc.setAprobacion(rs.getInt("aprobacion"));
                 enc.setRechazo(rs.getInt("rechazo"));
-                enc.setIdencuesta(rs.getInt("indiferencia"));
+                enc.setIndiferencia(rs.getInt("indiferencia"));
+                emi.setFecha(rs.getDate("fecha"));
+                pro.setNombre(rs.getString("nombre"));
                 lista.add(enc);
             }
             return lista;

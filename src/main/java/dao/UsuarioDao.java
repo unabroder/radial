@@ -56,12 +56,12 @@ public class UsuarioDao {
     }
 
     public boolean guardar(UsuarioBean usu) {
-
+        int inv = 2;
         String sql = "INSERT INTO usuarios(idtipo, usuario, clave) VALUES(?,?,?)";
         try {
             ps = conexion.conectar().prepareStatement(sql);
             TipoUsuario tp = usu.getIdtipo();
-            ps.setInt(1, tp.getIdtipo());
+            ps.setInt(1, inv);
             ps.setString(2, usu.getUsuario());
             ps.setString(3, usu.getClave());
             ps.executeUpdate();

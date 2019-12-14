@@ -39,18 +39,7 @@
                             </label>
                             <input type="password" class="form-control" id="exampleInputPassword1" name="clave" required="true">
                         </div>
-                        <div class="form-group">
-
-                            <label for="exampleInputPassword1">
-                                Tipo de Usuario
-                            </label>
-                            <select name="idtipo"  class="form-control">
-                                <option>Seleccione un Rol</option>
-                                <c:forEach items="${lista}" var="tipo">
-                                    <option value="${tipo.idtipo}">${tipo.tipo}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                 
                         <button type="submit" class="btn btn-primary pull-3 boton">
                             Registrar
                         </button>

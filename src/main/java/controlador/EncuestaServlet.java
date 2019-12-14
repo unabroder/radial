@@ -93,6 +93,7 @@ public class EncuestaServlet extends HttpServlet {
     protected void guardar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idemision = Integer.parseInt(request.getParameter("idemision"));
+        System.out.println("idemision = " + idemision);
         int idprograma = Integer.parseInt(request.getParameter("idprograma"));
         int total = Integer.parseInt(request.getParameter("total"));
         int aprobacion = Integer.parseInt(request.getParameter("aprobacion"));
@@ -107,22 +108,37 @@ public class EncuestaServlet extends HttpServlet {
         encuesta.setAprobacion(aprobacion);
         encuesta.setRechazo(rechazo);
         encuesta.setIndiferencia(indiferencia);
-
-        res = endao.guardar(encuesta);
-        if (res) {
-            msg = "Encuesta registrada";
+        int operacion = total - (aprobacion + rechazo + indiferencia);
+        System.out.println("total = " + total + " opr = " + operacion);
+        if (operacion == 0) {
+            res = endao.guardar(encuesta);
+            if (res) {
+                msg = "Encuesta registrada";
+            } else {
+                msg = "Error al guardar";
+            }
+            request.setAttribute("msg", msg);
+            List<EncuestaBean> lista = endao.consultar();
+            List<ProgramaBean> listapro = prodao.consultar();
+            List<EmisionBean> listaemi = emidao.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("listapro", listapro);
+            request.setAttribute("listaemi", listaemi);
+            rd = request.getRequestDispatcher("encuesta.jsp");
+            rd.forward(request, response);
         } else {
-            msg = "Error al guardar";
+            msg = "Los datos no concuerdan con el total de encuestados";
+            request.setAttribute("msg", msg);
+            List<EncuestaBean> lista = endao.consultar();
+            List<ProgramaBean> listapro = prodao.consultar();
+            List<EmisionBean> listaemi = emidao.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("listapro", listapro);
+            request.setAttribute("listaemi", listaemi);
+            rd = request.getRequestDispatcher("encuesta.jsp");
+            rd.forward(request, response);
         }
-        request.setAttribute("msg", msg);
-        List<EncuestaBean> lista = endao.consultar();
-        List<ProgramaBean> listapro = prodao.consultar();
-        List<EmisionBean> listaemi = emidao.consultar();
-        request.setAttribute("lista", lista);
-        request.setAttribute("listapro", listapro);
-        request.setAttribute("listaemi", listaemi);
-        rd = request.getRequestDispatcher("encuesta.jsp");
-        rd.forward(request, response);
+
     }
 
     protected void actualizar(HttpServletRequest request, HttpServletResponse response)
@@ -143,22 +159,36 @@ public class EncuestaServlet extends HttpServlet {
         encuesta.setAprobacion(aprobacion);
         encuesta.setRechazo(rechazo);
         encuesta.setIndiferencia(indiferencia);
-
-        res = endao.guardar(encuesta);
-        if (res) {
-            msg = "Encuesta actualizada";
+        int operacion = total - (aprobacion + rechazo + indiferencia);
+        if (operacion == 0) {
+            res = endao.guardar(encuesta);
+            if (res) {
+                msg = "Encuesta actualizada";
+            } else {
+                msg = "Error al guardar";
+            }
+            request.setAttribute("msg", msg);
+            List<EncuestaBean> lista = endao.consultar();
+            List<ProgramaBean> listapro = prodao.consultar();
+            List<EmisionBean> listaemi = emidao.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("listapro", listapro);
+            request.setAttribute("listaemi", listaemi);
+            rd = request.getRequestDispatcher("encuesta.jsp");
+            rd.forward(request, response);
         } else {
-            msg = "Error al guardar";
+            msg = "No se puede modificar por inconsistencias del total de encuestados";
+            request.setAttribute("msg", msg);
+            List<EncuestaBean> lista = endao.consultar();
+            List<ProgramaBean> listapro = prodao.consultar();
+            List<EmisionBean> listaemi = emidao.consultar();
+            request.setAttribute("lista", lista);
+            request.setAttribute("listapro", listapro);
+            request.setAttribute("listaemi", listaemi);
+            rd = request.getRequestDispatcher("encuesta.jsp");
+            rd.forward(request, response);
         }
-        request.setAttribute("msg", msg);
-        List<EncuestaBean> lista = endao.consultar();
-        List<ProgramaBean> listapro = prodao.consultar();
-        List<EmisionBean> listaemi = emidao.consultar();
-        request.setAttribute("lista", lista);
-        request.setAttribute("listapro", listapro);
-        request.setAttribute("listaemi", listaemi);
-        rd = request.getRequestDispatcher("encuesta.jsp");
-        rd.forward(request, response);
+
     }
 
     protected void eliminar(HttpServletRequest request, HttpServletResponse response)

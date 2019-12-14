@@ -71,14 +71,12 @@ public class UsuarioServlet extends HttpServlet {
 
     protected void guardar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idtipo = Integer.parseInt(request.getParameter("idtipo"));
+
         String usuario = request.getParameter("usuario");
         String clave = request.getParameter("clave");
         Hash hash = new Hash();
         String pass = hash.convertirSHA256(clave);
         UsuarioBean usu = new UsuarioBean(0);
-        TipoUsuario tp = new TipoUsuario(idtipo);
-        usu.setIdtipo(tp);
         usu.setUsuario(usuario);
         usu.setClave(pass);
 
@@ -98,7 +96,7 @@ public class UsuarioServlet extends HttpServlet {
                 msg = "existe";
             }
             request.setAttribute("msg", msg);
-            rd = request.getRequestDispatcher("index.jsp");
+            rd = request.getRequestDispatcher("RegistrarUsuario.jsp");
             rd.forward(request, response);
         }
     }
